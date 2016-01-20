@@ -20,7 +20,7 @@ var work =
 
 
 };
-console.log(work);
+//console.log(work);
 var projects =
 {
 	"project" :
@@ -34,7 +34,19 @@ var projects =
 					"any outages or recent/present/future work",
 			"images" : 
 			[
-				"image1.png" ,  "image2.png"
+				"images/fry.jpg" ,  "images/fry.jpg"
+			]
+		},
+		{
+			"title" : "PGE Flow Limit Tool",
+			"datesWorked" : "2015",
+			"description" : "FLT in addition to the SLIC tool is" + 
+					"used to provide help to engineers on site and "+
+					"provide them the necessary information needed for"+ 
+					"any outages or recent/present/future work",
+			"images" : 
+			[
+				"images/fry.jpg" ,  "images/fry.jpg"
 			]
 		}
 	]
@@ -67,6 +79,7 @@ var education =
 	 [
 	 	 {
 			"name" : "California Polytechnic State University SLO",
+			"degree" : "Bachelor's of Science in EE",
 			"location" : "San Luis Obispo",
 			"yearsAttended" : "2012-2015",
 			"major" : "Electrical Engineering", 
@@ -74,6 +87,7 @@ var education =
 		},
 		{
 			"name" : "Canada College",
+			"degree" : "Associate's of Science in Engineering",
 			"location" : "Redwood City, CA",
 			"yearsAttended" : "2008-2012",
 			"major" : "Engineering", 
@@ -84,7 +98,7 @@ var education =
 	"onlineCourses" : 
 	[
 		{
-			"title" : "JavaScript for Begineers",
+			"title" : "JavaScript for Beginners",
 			"school" : "Udacity",
 			"dates" : "2016",
 			"url" : "www.udacity.com/courser/ud804"
@@ -92,7 +106,6 @@ var education =
 
 	]
 }
-
 
 //var name = "Jose Carrillo";
 var formattedName = HTMLheaderName.replace( "%data%", bio.name);
@@ -160,4 +173,104 @@ for(job in work.jobs)
 	$(".work-entry:last").append(formattedWork);
 }
 
+/*
+$(document).click(function (loc)
+{
+	var x = loc.pageX;
+	var y = loc.pageY;
+
+	logClicks(x,y);
+} ); */
+
+//var name = "Jose Carrillo";
+function inName(name)
+{
+ 	var finalName = name;
+    // Your code goes here!
+    //console.log(finalName.toLocaleUpperCase);
+
+    var first  = finalName.slice(0, finalName.indexOf(' '));
+    var last = finalName.slice(finalName.indexOf(' ') );
+    first = first.toLocaleLowerCase();
+   // first[0] = finalName[0].toLocaleUpperCase();
+  
+    first = first.slice(0,1).toLocaleUpperCase() + first.slice(1);
+    //console.log(first);
+    last = last.toLocaleUpperCase();
+    //console.log(last);
+    // Don't delete this line!
+    //return first+last;
+    return first + last;
+}
+
+$("#main").append(internationalizeButton);
+
+
+
+projects.display = function()
+{
+	for(proj in projects.project)
+	{
+		$("#projects").append(HTMLprojectStart);
+
+		var formattedProjTitle = HTMLprojectTitle.replace("%data%", projects.project[proj].title);
+		 $(".project-entry:last").append(formattedProjTitle);
+
+		var formattedProjDates = HTMLprojectDates.replace("%data%", projects.project[proj].datesWorked);
+		 $(".project-entry:last").append(formattedProjDates);
+
+		var formattedProjDescription = HTMLprojectDescription.replace("%data%", projects.project[proj].description);
+		$(".project-entry:last").append(formattedProjDescription);
+
+	
 		
+		
+		if( projects.project[proj].images.length > 0 )
+		{
+			for( image in projects.project[proj].images)
+			{
+			 	var formattedProjImage = HTMLprojectImage.replace("%data%", projects.project[proj].images[image]);
+			 	$(".project-entry:last").append(formattedProjImage);
+
+			}
+		}
+
+	}
+}
+projects.display();
+
+education.display = function()
+{
+
+	for( school in education.schools )
+	{
+		$("#education").append(HTMLschoolStart);
+		var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].yearsAttended);
+		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+		var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+
+		var formattedSchool = formattedName+formattedDegree+formattedDates+
+				formattedLocation+formattedMajor;
+		$(".education-entry:last").append(formattedSchool);
+
+	}
+	$(".education-entry:last").append(HTMLonlineClasses);
+
+	for( onlineCourse in education.onlineCourses)
+	{
+		var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school);
+		var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates);
+		var formattedURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
+
+		var formattedOnlineCourse =formattedTitle+formattedSchool+formattedDates+formattedURL ;
+		$(".education-entry:last").append(formattedOnlineCourse);
+	}
+}
+
+
+education.display();
+
+$("#mapDiv").append(googleMap);
