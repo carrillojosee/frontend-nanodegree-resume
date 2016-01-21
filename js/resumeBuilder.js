@@ -274,3 +274,14 @@ education.display = function()
 education.display();
 
 $("#mapDiv").append(googleMap);
+
+var formattedMobile = HTMLmobile.replace("%data%", bio.contactInfo.mobile);
+var formattedEmail = HTMLemail.replace("%data%", bio.contactInfo.email);
+var formattedTwitter = HTMLtwitter.replace("%data%", bio.contactInfo.twitter);
+var formattedGithub = HTMLgithub.replace("%data%", bio.contactInfo.github);
+var formattedBlog = HTMLblog.replace("%data%", bio.contactInfo.blog);
+var formattedLocation = HTMLlocation.replace("%data%", bio.contactInfo.location);
+
+var formattedContacts = formattedMobile + formattedEmail + formattedTwitter + 
+					formattedGithub + formattedBlog + formattedLocation;
+$("#footerContacts").append(formattedContacts);
